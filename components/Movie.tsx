@@ -20,7 +20,7 @@ function Movie(props: any) {
             setMovieData(data)
             console.log(data)
         })
-    }, [])
+    }, [props.id])
 
     return (
         <div className="cursor-pointer" onClick={(e) => {

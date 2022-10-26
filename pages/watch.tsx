@@ -67,7 +67,7 @@ function Watch() {
         document.addEventListener('fullscreenchange', () => {
             setIsFullscreen(document.fullscreenElement);
         });
-    }, [])
+    }, [id])
 
     return <>
         <Flex ref={websiteRef}>
