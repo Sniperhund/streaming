@@ -7,8 +7,6 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 function Movie(props: any) {
     const [isHovering, setIsHovering] = useState(false)
-
-    const supabase = useSupabaseClient()
     const router = useRouter()
 
     const [movieData, setMovieData] = useState<any>(null)
