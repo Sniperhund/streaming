@@ -11,9 +11,9 @@ config.autoAddCss = false;
 function MyApp({ Component, pageProps }: AppProps) {
     const [supabaseClient] = useState(() => createBrowserSupabaseClient())
 
-  return (
-    <ChakraProvider>
-        <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession}>
+    return (
+            <ChakraProvider>
+                <SessionContextProvider supabaseClient={supabaseClient}>
             <Component {...pageProps} />
         </SessionContextProvider>
     </ChakraProvider>

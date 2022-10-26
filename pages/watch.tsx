@@ -29,9 +29,9 @@ function Watch() {
     const [loading, setLoading] = useState(false)
 
     // @ts-ignore
-    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-    const [isVideoMuted, setIsVideoMuted] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
+    const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
+    const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const websiteRef = useRef<HTMLDivElement>(null);
@@ -65,7 +65,10 @@ function Watch() {
         })
 
         document.addEventListener('fullscreenchange', () => {
-            setIsFullscreen(document.fullscreenElement);
+            if (document.fullscreen)
+                setIsFullscreen(true)
+            else
+                setIsFullscreen(false)
         });
     }, [id])
 
@@ -73,20 +76,16 @@ function Watch() {
         <Flex ref={websiteRef}>
             <Box pos="absolute" zIndex="-10" className="h-screen w-screen bg-black" />
             <Flex pos="absolute" className="h-screen w-screen">
-                <Box
-                    as="video"
-                    autoPlay
+                <video autoPlay
                     src={""}
                     className="m-auto h-screen"
-                    sx={{ aspectRatio: '16/9' }}
                     ref={videoRef}
                     onClick={(e) => {
                         if (videoRef.current?.paused)
                             videoRef.current?.play()
                         else
                             videoRef.current?.pause()
-                    }}
-                />
+                    }}/>
                 <Flex pos="absolute" zIndex="100" className="right-6 top-6">
                     <IconButton aria-label={"Go back"} className="hover:scale-100 lg:hover:scale-125 scale-75 lg:scale-100"
                         icon={<FontAwesomeIcon icon={faXmark} style={{color: "white", fontSize: 50}} />} variant="link" onClick={() => { router.push("../browse") }} />
@@ -133,7 +132,8 @@ function Watch() {
                                 if (!isFullscreen)
                                     websiteRef.current?.requestFullscreen()
                                 else
-                                    document.exitFullscreen()
+                                    if (document.fullscreen)
+                                        document.exitFullscreen()
                             }} />
                     </HStack>
                 </Flex>
