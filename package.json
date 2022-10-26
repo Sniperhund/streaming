@@ -25,7 +25,8 @@
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "supabase": "^1.11.2"
+    "supabase": "^1.11.2",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@types/node": "18.11.3",

@@ -9,24 +9,23 @@ function Movie(props: any) {
     const [isHovering, setIsHovering] = useState(false)
     const router = useRouter()
 
-    const [movieData, setMovieData] = useState<any>(null)
+    const [coverImage, setCoverImage] = useState<any>(null)
 
     useEffect(() => {
         fetch("api/getMovieData?id=" + props.id)
         .then((res) => res.json())
         .then((data) => {
-            setMovieData(data)
-            console.log(data)
+            setCoverImage(data.data[0].coverUrl)
         })
     }, [props.id])
 
     return (
-        <div className="cursor-pointer" onClick={(e) => {
+        <div onClick={(e) => {
 
         }}>
             <Box pos="relative" className="h-fit w-72 hover:w-80 transition-all" borderWidth='1px' borderRadius='lg' overflow='hidden' zIndex="50"
                 onMouseOver={() => setIsHovering(true)} onMouseOut={() => setIsHovering(false)} onClick={() => { router.push("/watch?id=" + props.id) }}>
-                <Image src={props.coverUrl} alt="Cover image" className="h-full w-full" />
+                <Image src={coverImage} alt="Cover image" className="h-full w-full" />
                 {isHovering ? (
                         <div className="absolute z-[100] top-0 right-0 h-40 w-72 hover:w-80 hover:h-[11.1rem] bg-[#0000004d]">
                             <IconButton aria-label="Play movie" pos="absolute" className="left-3 bottom-5"
